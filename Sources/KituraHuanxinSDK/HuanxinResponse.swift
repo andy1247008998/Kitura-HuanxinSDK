@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct HuanxinResponse {
+public struct HuanxinResponse {
     var action:String?
     var application:String?
     var params:[String]?

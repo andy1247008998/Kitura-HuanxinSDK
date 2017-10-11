@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct HuanxinToken {
+public struct HuanxinToken {
     var access_token:String?
     var expires_in:Int?
     var application:String?

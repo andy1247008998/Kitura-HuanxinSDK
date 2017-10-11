@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct HuanxinUser{
+public struct HuanxinUser{
     var username:String
     var password:String
     var nickname:String?

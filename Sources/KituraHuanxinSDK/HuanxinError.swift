@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum HuanxinError:Int, Swift.Error {
+public enum HuanxinError:Int, Swift.Error {
     case NetworkError
     case OtherErros
 }
