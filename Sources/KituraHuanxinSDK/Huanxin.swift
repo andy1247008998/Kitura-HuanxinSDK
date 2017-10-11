@@ -10,7 +10,7 @@ import LoggerAPI
 import SwiftyJSON
 import Foundation
 
-class Huanxin{
+public class Huanxin{
 
     var domain:String
     var orgName:String
