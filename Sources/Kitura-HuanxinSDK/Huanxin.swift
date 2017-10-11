@@ -101,7 +101,7 @@ class Huanxin{
         }
 
         KituraRequest.request(.post,
-                "\(huanxinBaseURL)/token",
+                "\(self.baseURL)/token",
                 parameters: [
                     "grant_type": "client_credentials",
                     "client_id": "\(client_id)",
@@ -141,7 +141,7 @@ class Huanxin{
             }
 
             KituraRequest.request(.post,
-                    "\(huanxinBaseURL)/users",
+                    "\(self.baseURL)/users",
                     parameters: [
                         "grant_type": "client_credentials",
                         "username": "\(username)",
@@ -163,7 +163,7 @@ class Huanxin{
 //    func registerMultipleUsers(users:[HuanxinUser], nickname:String?, withToken:Bool,result:@escaping(HuanxinResponse,HuanxinError?)->()){
 //        getToken() { token in
 //            KituraRequest.request(.post,
-//                    "\(huanxinBaseURL)/users",
+//                    "\(self.baseURL)/users",
 //                    parameters: [
 //                        "grant_type": "client_credentials",
 //                        //users
@@ -185,7 +185,7 @@ class Huanxin{
     func getUser(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(username)",
+                    "\(self.baseURL)/users/\(username)",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -200,7 +200,7 @@ class Huanxin{
     func huanxinGetUsersCompleted(limit:Int, cursor:String?, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users",
+                    "\(self.baseURL)/users",
                     parameters: [
                         "limit":"\(limit)"
                     ],
@@ -215,10 +215,10 @@ class Huanxin{
         }
     }
 
-    func deleteUser(username:String) {
+    func deleteUser(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()) {
         getToken() { token in
             KituraRequest.request(.delete,
-                    "\(huanxinBaseURL)/users/\(username)",
+                    "\(self.baseURL)/users/\(username)",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -232,7 +232,7 @@ class Huanxin{
     func resetPassword(username:String,password:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.put,
-                    "\(huanxinBaseURL)/users/\(username)/password",
+                    "\(self.baseURL)/users/\(username)/password",
                     parameters: [
                         "newpassword": "\(password)"
                     ],
@@ -249,7 +249,7 @@ class Huanxin{
     func resetNickname(username:String,nickname:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.put,
-                    "\(huanxinBaseURL)/users/\(username)",
+                    "\(self.baseURL)/users/\(username)",
                     parameters: [
                         "nickname": "\(nickname)"
                     ],
@@ -267,7 +267,7 @@ class Huanxin{
     func addFriend(owner_username:String,friend_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.post,
-                    "\(huanxinBaseURL)/users/\(owner_username)/contacts/users/\(friend_username)",
+                    "\(self.baseURL)/users/\(owner_username)/contacts/users/\(friend_username)",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -281,7 +281,7 @@ class Huanxin{
     func removeFriend(owner_username:String,friend_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.delete,
-                    "\(huanxinBaseURL)/users/\(owner_username)/contacts/users/\(friend_username)",
+                    "\(self.baseURL)/users/\(owner_username)/contacts/users/\(friend_username)",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -292,10 +292,10 @@ class Huanxin{
         }
     }
 
-    func getContactList(owner_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->(), result:@escaping(HuanxinResponse,HuanxinError?)->()){
+    func getContactList(owner_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(owner_username)/contacts/users",
+                    "\(self.baseURL)/users/\(owner_username)/contacts/users",
                     headers: ["Authorization": "Bearer \(token!.access_token!)"]
             ).response {
                 request, response, data, error in
@@ -310,7 +310,7 @@ class Huanxin{
     func getBlockedUserList(owner_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(owner_username)/blocks/users",
+                    "\(self.baseURL)/users/\(owner_username)/blocks/users",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -324,7 +324,7 @@ class Huanxin{
     func addBlockedUser(owner_username:String, blocked_users:[String], result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.post,
-                    "\(huanxinBaseURL)/users/\(owner_username)/blocks/users",
+                    "\(self.baseURL)/users/\(owner_username)/blocks/users",
                     parameters: [
                         "usernames": "\(blocked_users)"
                     ],
@@ -341,7 +341,7 @@ class Huanxin{
     func huanxinRemoveBlockedUserCompleted(owner_username:String, blocked_username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.delete,
-                    "\(huanxinBaseURL)/users/\(owner_username)/blocks/users/\(blocked_username)",
+                    "\(self.baseURL)/users/\(owner_username)/blocks/users/\(blocked_username)",
                     headers: ["Authorization": "Bearer \(token!)"]
             ).response {
                 request, response, data, error in
@@ -355,7 +355,7 @@ class Huanxin{
     func getUserStatus(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(username)/status",
+                    "\(self.baseURL)/users/\(username)/status",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
@@ -372,7 +372,7 @@ class Huanxin{
     func getUserOfflineMessageCount(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(username)/offline_msg_count",
+                    "\(self.baseURL)/users/\(username)/offline_msg_count",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
@@ -389,7 +389,7 @@ class Huanxin{
     func getUserOfflineMessageStatus(username:String, message_id:Int, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(username)/offline_msg_status\(message_id)",
+                    "\(self.baseURL)/users/\(username)/offline_msg_status\(message_id)",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
@@ -406,7 +406,7 @@ class Huanxin{
     func deactivateUser(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.post,
-                    "\(huanxinBaseURL)/users/\(username)/deactivate",
+                    "\(self.baseURL)/users/\(username)/deactivate",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
@@ -423,7 +423,7 @@ class Huanxin{
     func activateUser(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.post,
-                    "\(huanxinBaseURL)/users/\(username)/deactivate",
+                    "\(self.baseURL)/users/\(username)/deactivate",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
@@ -440,7 +440,7 @@ class Huanxin{
     func disconnectUser(username:String, result:@escaping(HuanxinResponse,HuanxinError?)->()){
         getToken() { token in
             KituraRequest.request(.get,
-                    "\(huanxinBaseURL)/users/\(username)/disconnect",
+                    "\(self.baseURL)/users/\(username)/disconnect",
                     headers: [
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(token!)"
