@@ -2,12 +2,10 @@
 // Created by ailion on 17-9-24.
 //
 
-import Kitura
+//import Kitura
 import KituraNet
 import KituraRequest
-import HeliumLogger
-import SwiftKuery
-import SwiftKueryMySQL
+//import HeliumLogger
 import LoggerAPI
 import SwiftyJSON
 import Foundation
