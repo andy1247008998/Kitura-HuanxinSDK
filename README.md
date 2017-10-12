@@ -7,5 +7,7 @@
 * 环信是一个即时通信(IM)服务提供商。如果你的App需要好友私聊、群聊、客服等功能，你就需要一个IM服务。环信已经提供了iOS、Android等平台的SDK，用于客户端直接与环信服务器的交互。除此之外，注册、注销用户等高权限操作不适合从客户端直接发起请求，而应该让客户端先和[你的服务器]交互，再由[你的服务器]去和[环信服务器]交互。由此，服务器端集成是需要开发者自己去完成的。
 * Kitura-HuanxinSDK是用于Swift+Kitura+环信解决方案的服务器端集成。它是对环信服务器端API的简单封装。开发者可以专注于App功能的开发，不用再去逐个研究环信服务器API的细节。
 
+![0_1507774177862_kitura_huanxinsdk_arch.png](http://pics-mustu-cn.oss-cn-shenzhen.aliyuncs.com/assets/89e3bc67-c0be-48ac-a10f-de5cdb2e9c31.png) 
+
 ## 注意
 此项目用于在【你的服务器】和【环信服务器】之间的交互，并非iOS客户端集成SDK
