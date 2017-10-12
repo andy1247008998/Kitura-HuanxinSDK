@@ -9,5 +9,45 @@
 
 ![0_1507774177862_kitura_huanxinsdk_arch.png](http://pics-mustu-cn.oss-cn-shenzhen.aliyuncs.com/assets/89e3bc67-c0be-48ac-a10f-de5cdb2e9c31.png) 
 
-## 注意
-此项目用于在【你的服务器】和【环信服务器】之间的交互，并非iOS客户端集成SDK
+## 使用方法
+
+1. Swift Package Manager
+
+```
+import PackageDescription
+let package = Package(
+        name: "YourProjectName",
+        dependencies: [
+            .Package(url: "https://github.com/andy1247008998/Kitura-HuanxinSDK.git", majorVersion: 0)
+        ]
+)
+```
+
+2. 环信账户信息
+```
+import KituraHuanxinSDK
+
+//拼接环信URL基址
+let huanxinDomain = "https://a1.easemob.com"
+let huanxinOrgName = "1111222233334444"
+let huanxinAppName = "yourappname"
+let huanxinBaseURL = "\(huanxinDomain)/\(huanxinOrgName)/\(huanxinAppName)"
+//准备好ID和Secret
+let huanxinClientID = "AAAABBBBCCCCDDDDEEEEFFFF"
+let huanxinClientSecret = "AAAABBBBCCCCDDDDEEEEFFFFGGGG"
+```
+
+3.  获取一个Huanxin实例
+```
+let huanxin = Huanxin(domain:huanxinDomain, orgName:huanxinOrgName, appName:huanxinAppName, client_id:huanxinClientID, client_secret:huanxinClientSecret)
+```
+
+4. 注册用户
+
+```
+huanxin.registerUser(username:username, password:password, nickname:nickname, withToken:true){ registerUserResponse, error in
+    print("registerUserResponse is \(registerUserResponse)")
+}
+```
+
+
